@@ -1,3 +1,5 @@
+
+import logging
 import config
 import openai
 
@@ -11,8 +13,10 @@ openai.api_key = config.OPENAI_API_KEY
 token = config.TOKEN
 
 
+logging.basicConfig(level=logging.INFO)
 bot = Bot(token)
 dp = Dispatcher(bot)
+
 
 def update(messages, role, content):
     messages.append({"role": role, "content": content})
@@ -21,6 +25,15 @@ def update(messages, role, content):
 def main():
     print('[+] ChatGPT startet like main program')
     executor.start_polling(dp, skip_updates=True)
+
+
+@dp.message_handler(commands="start")
+async def start(message: types.Message):
+    await message.answer(f'Привет, {message.from_user.first_name}! Я бот Синди, в которого интегрировали ChatGPT. Какой у тебя вопрос?')
+
+@dp.message_handler(commands=['developer'])
+async def sm_link(message: types.Message):
+    await message.answer('Вот ссылка на моего разработчика: t.me/lariosov')
 
 
 @dp.message_handler()
