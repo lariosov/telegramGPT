@@ -5,6 +5,7 @@ __pycache__/
 
 # Igonred files
 config.py
+admin.py
 db.py
 db.sqlite
 
