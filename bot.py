@@ -27,7 +27,9 @@ def update(messages, role, content):
     return messages
 
 def main():
-    print('[+] ChatGPT startet like main program')
+
+    print('[+] ChatGPT started like main program.')
+
     cur.executescript('''
     CREATE TABLE IF NOT EXISTS users(
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
@@ -36,6 +38,9 @@ def main():
     );
     ''')
     con.commit()
+
+    print('[+] Database started and ready for work.')
+    
     executor.start_polling(dp, skip_updates=True)
 
 @dp.message_handler(commands='check')
