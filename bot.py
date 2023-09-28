@@ -33,7 +33,7 @@ def main():
     executor.start_polling(dp, skip_updates=True)
 
 
-# Обработка команд
+# Обработка всех команд
 
 @dp.message_handler(commands="start")
 async def start(message: types.Message):
