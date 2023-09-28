@@ -1,14 +1,16 @@
 # TelegramGPT
+# Импортируем основное
 
 import logging
 import openai
 import os
 
-
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
 
+
+# Константы (в нашем случае ключи и уровень логов)
 
 LOG_LEVEL = os.environ.get('LOG_LEVEL', 'INFO').upper()
 openai.api_key = os.getenv('OPENAI_API_KEY')
@@ -20,6 +22,8 @@ bot = Bot(token)
 dp = Dispatcher(bot)
 
 
+# Задаем настройки бота и main функцию
+
 def update(messages, role, content):
     messages.append({"role": role, "content": content})
     return messages
@@ -29,6 +33,8 @@ def main():
     executor.start_polling(dp, skip_updates=True)
 
 
+# Обработка команд
+
 @dp.message_handler(commands="start")
 async def start(message: types.Message):
     await message.answer(f'Привет, {message.from_user.first_name}! Я бот Синди, в которого интегрировали ChatGPT. Какой у тебя вопрос?')
@@ -37,6 +43,8 @@ async def start(message: types.Message):
 async def sm_link(message: types.Message):
     await message.answer('Вот ссылка на моего разработчика: t.me/lariosov')
 
+
+# Основные настройки бота (его роль и примеры общения)
 
 @dp.message_handler()
 async def howits(message : types.Message):
